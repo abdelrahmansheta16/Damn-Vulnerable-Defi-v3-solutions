@@ -128,6 +128,10 @@ describe("[Challenge] Puppet", function () {
       "Attacker ETH balance before",
       ethers.utils.formatEther(bal.toString())
     );
+    await token
+      .connect(player)
+      .transfer(attacker.address, PLAYER_INITIAL_TOKEN_BALANCE);
+    bal = await token.balanceOf(attacker.address);
   });
 
   after(async function () {
