@@ -122,6 +122,12 @@ describe("[Challenge] Puppet", function () {
       player.address,
       { value: ethers.utils.parseEther("15") }
     );
+    console.log("Attacker @", attacker.address);
+    let bal = await attacker.provider.getBalance(attacker.address);
+    console.log(
+      "Attacker ETH balance before",
+      ethers.utils.formatEther(bal.toString())
+    );
   });
 
   after(async function () {
