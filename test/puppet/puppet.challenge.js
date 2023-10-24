@@ -114,6 +114,14 @@ describe("[Challenge] Puppet", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    const Attacker = await ethers.getContractFactory("AttackPuppet");
+    const attacker = await Attacker.deploy(
+      uniswapExchange.address,
+      lendingPool.address,
+      token.address,
+      player.address,
+      { value: ethers.utils.parseEther("15") }
+    );
   });
 
   after(async function () {
