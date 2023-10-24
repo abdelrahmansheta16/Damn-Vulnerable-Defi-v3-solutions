@@ -132,6 +132,11 @@ describe("[Challenge] Puppet", function () {
       .connect(player)
       .transfer(attacker.address, PLAYER_INITIAL_TOKEN_BALANCE);
     bal = await token.balanceOf(attacker.address);
+    console.log(
+      `Attacker token balance before `,
+      ethers.utils.formatEther(bal.toString())
+    );
+    await attacker.swap();
   });
 
   after(async function () {
