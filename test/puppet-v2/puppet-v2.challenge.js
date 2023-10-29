@@ -116,6 +116,17 @@ describe("[Challenge] Puppet v2", function () {
         player.address,
         time + 5000
       );
+    let bal, reserveA, reserveB;
+    reserveA = await token.balanceOf(uniswapExchange.address);
+    console.log(
+      "Exchange Token balance",
+      ethers.utils.formatEther(reserveA.toString())
+    );
+    reserveB = await weth.balanceOf(uniswapExchange.address);
+    console.log(
+      "Exchange Eth balance",
+      ethers.utils.formatEther(reserveB.toString())
+    );
   });
 
   after(async function () {
