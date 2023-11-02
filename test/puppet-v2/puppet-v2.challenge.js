@@ -127,6 +127,11 @@ describe("[Challenge] Puppet v2", function () {
       "Exchange Eth balance",
       ethers.utils.formatEther(reserveB.toString())
     );
+    bal = await ethers.provider.getBalance(player.address);
+    console.log("Player Eth balance", ethers.utils.formatEther(bal.toString()));
+    amountIn = await lendingPool.calculateDepositOfWETHRequired(
+      POOL_INITIAL_TOKEN_BALANCE
+    );
   });
 
   after(async function () {
