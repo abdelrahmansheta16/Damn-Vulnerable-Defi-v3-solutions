@@ -132,6 +132,10 @@ describe("[Challenge] Puppet v2", function () {
     amountIn = await lendingPool.calculateDepositOfWETHRequired(
       POOL_INITIAL_TOKEN_BALANCE
     );
+    console.log(
+      "Amount required to drain the pool",
+      ethers.utils.formatEther(amountIn.toString())
+    );
   });
 
   after(async function () {
