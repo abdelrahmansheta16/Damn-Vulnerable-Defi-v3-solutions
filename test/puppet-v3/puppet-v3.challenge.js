@@ -272,6 +272,13 @@ describe("[Challenge] Puppet v3", function () {
       ),
       "ether"
     );
+
+    console.log("current liquidity ", await uniswapPool.liquidity().toString());
+    console.log("current slot0 ", (await uniswapPool.slot0())[0].toString());
+    console.log(
+      "current slot0 tick ",
+      (await uniswapPool.slot0())[1].toString()
+    );
   });
 
   after(async function () {
