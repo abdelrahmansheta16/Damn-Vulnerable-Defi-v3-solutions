@@ -260,6 +260,18 @@ describe("[Challenge] Puppet v3", function () {
       "ether",
       "\n____________________________________________________"
     );
+
+    await time.increase(100);
+    console.log("Current block number", await ethers.provider.getBlockNumber());
+    console.log(
+      "Quote after 100s",
+      ethers.utils.formatEther(
+        await lendingPool.calculateDepositOfWETHRequired(
+          LENDING_POOL_INITIAL_TOKEN_BALANCE
+        )
+      ),
+      "ether"
+    );
   });
 
   after(async function () {
