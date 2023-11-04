@@ -237,6 +237,29 @@ describe("[Challenge] Puppet v3", function () {
     await puppetV3Attacker.callSwap(ethers.utils.parseEther("109"), {
       gasLimit: 3000000,
     });
+    console.log(
+      "Attacker Weth Balance after swap",
+      ethers.utils.formatEther(
+        (await weth.balanceOf(puppetV3Attacker.address)).toString()
+      )
+    );
+    console.log(
+      "Attacker Token Balance after swap",
+      ethers.utils.formatEther(
+        (await token.balanceOf(puppetV3Attacker.address)).toString()
+      )
+    );
+    console.log("Current block number", await ethers.provider.getBlockNumber());
+    console.log(
+      "Quote after swap1",
+      ethers.utils.formatEther(
+        await lendingPool.calculateDepositOfWETHRequired(
+          LENDING_POOL_INITIAL_TOKEN_BALANCE
+        )
+      ),
+      "ether",
+      "\n____________________________________________________"
+    );
   });
 
   after(async function () {
