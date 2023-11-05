@@ -63,6 +63,10 @@ describe("[Challenge] ABI smuggling", function () {
     let iface = new ethers.utils.Interface(abi);
     let sig = iface.getSighash("execute");
     console.log(sig);
+    abi = [`function sweepFunds(address, address)`];
+    iface = new ethers.utils.Interface(abi);
+    sig = iface.getSighash("sweepFunds");
+    console.log(sig);
   });
 
   after(async function () {
