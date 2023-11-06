@@ -307,6 +307,10 @@ describe("[Challenge] Puppet v3", function () {
       "tickCumulatives at 10min ago",
       (await puppetV3Attacker.tickCumulatives(0)).toString()
     );
+    console.log(
+      "tickCumulatives now",
+      (await puppetV3Attacker.tickCumulatives(1)).toString()
+    );
 
   });
 
