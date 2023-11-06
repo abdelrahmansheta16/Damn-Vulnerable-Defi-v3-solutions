@@ -290,6 +290,12 @@ describe("[Challenge] Puppet v3", function () {
     await lendingPool
       .connect(player)
       .borrow(LENDING_POOL_INITIAL_TOKEN_BALANCE);
+
+    console.log(
+      `Seconds lapsed since execution starts`,
+      (await ethers.provider.getBlock("latest")).timestamp -
+        initialBlockTimestamp
+    );
   });
 
   after(async function () {
