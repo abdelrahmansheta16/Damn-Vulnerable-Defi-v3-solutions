@@ -300,6 +300,7 @@ describe("[Challenge] Puppet v3", function () {
       `current timestamp`,
       (await ethers.provider.getBlock("latest")).timestamp
     );
+
   });
 
   after(async function () {
