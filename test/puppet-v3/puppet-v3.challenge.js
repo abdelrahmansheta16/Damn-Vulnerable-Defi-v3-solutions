@@ -301,6 +301,13 @@ describe("[Challenge] Puppet v3", function () {
       (await ethers.provider.getBlock("latest")).timestamp
     );
 
+    // Check the pool status for references
+    await puppetV3Attacker.observePool([600, 0]);
+    console.log(
+      "tickCumulatives at 10min ago",
+      (await puppetV3Attacker.tickCumulatives(0)).toString()
+    );
+
   });
 
   after(async function () {
