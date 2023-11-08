@@ -312,6 +312,12 @@ describe("[Challenge] Puppet v3", function () {
       (await puppetV3Attacker.tickCumulatives(1)).toString()
     );
 
+    console.log(
+      "Weth balance in UniswapPool",
+      ethers.utils.formatEther(
+        (await weth.balanceOf(uniswapPool.address)).toString()
+      )
+    );
   });
 
   after(async function () {
