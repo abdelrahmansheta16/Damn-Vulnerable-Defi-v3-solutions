@@ -318,6 +318,12 @@ describe("[Challenge] Puppet v3", function () {
         (await weth.balanceOf(uniswapPool.address)).toString()
       )
     );
+    console.log(
+      "Token balance in UniswapPool",
+      ethers.utils.formatEther(
+        (await token.balanceOf(uniswapPool.address)).toString()
+      )
+    );
   });
 
   after(async function () {
