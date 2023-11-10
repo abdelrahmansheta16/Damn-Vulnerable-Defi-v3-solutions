@@ -324,6 +324,13 @@ describe("[Challenge] Puppet v3", function () {
         (await token.balanceOf(uniswapPool.address)).toString()
       )
     );
+    //For reference: calculate spot price based on ratio of token balances
+    let x = await weth.balanceOf(uniswapPool.address);
+    let y = await token.balanceOf(uniswapPool.address);
+    console.log(
+      "Ref: Quote of 1million token from lending pool in Weth (based on ratio of token balances):",
+      (x * 1000000 * 3) / y
+    );
   });
 
   after(async function () {
