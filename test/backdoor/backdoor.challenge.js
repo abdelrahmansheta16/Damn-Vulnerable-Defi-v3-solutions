@@ -63,6 +63,19 @@ describe("[Challenge] Backdoor", function () {
 
     const FakeMaster = await ethers.getContractFactory("FakeMaster");
     const fakeMaster = await FakeMaster.deploy();
+    //Create proxies and register wallets through createProxyWithCallback();
+    //And use fakeMaster as setupModule receipient to register backDoor attacker as whitelisted module;
+    abi1 = [
+      `function setup(
+        address[] calldata _owners,
+        uint256 _threshold,
+        address to,
+        bytes calldata data,
+        address fallbackHandler,
+        address paymentToken,
+        uint256 payment,
+        address payable paymentReceiver)`,
+    ];
   });
 
   after(async function () {
