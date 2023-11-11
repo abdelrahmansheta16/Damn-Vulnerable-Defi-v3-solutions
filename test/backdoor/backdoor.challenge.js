@@ -76,6 +76,10 @@ describe("[Challenge] Backdoor", function () {
         uint256 payment,
         address payable paymentReceiver)`,
     ];
+    iface1 = new ethers.utils.Interface(abi1);
+    abi2 = [`function enableModule2(address module)`];
+    iface2 = new ethers.utils.Interface(abi2);
+    data = iface2.encodeFunctionData("enableModule2", [backdoor.address]);
   });
 
   after(async function () {
