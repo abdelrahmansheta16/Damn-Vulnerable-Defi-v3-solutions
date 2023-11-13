@@ -102,6 +102,13 @@ describe("[Challenge] Backdoor", function () {
       console.log(`new wallet for user ${users[i]} is at ${newWallets[i]}`);
       expect(await token.balanceOf(newWallets[i])).to.eq(10n * 10n ** 18n);
     }
+    //Prepare calldata for backDoor attacker to pass to newWallets to execute;
+    abi3 = ["function transfer(address to, uint256 amount)"];
+    iface3 = new ethers.utils.Interface(abi3);
+    data = iface3.encodeFunctionData("transfer", [
+      player.address,
+      ethers.utils.parseEther("10"),
+    ]);
   });
 
   after(async function () {
