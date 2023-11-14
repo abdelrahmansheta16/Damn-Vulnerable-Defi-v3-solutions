@@ -107,6 +107,7 @@ describe("[Challenge] Wallet mining", function () {
         console.log("Master deployment nonce", i);
       }
     }
+    /** Step 2: Deploy factory, master copy and deposit wallet contracts on target wallet based on nonce calculated from previous step */
   });
 
   after(async function () {
