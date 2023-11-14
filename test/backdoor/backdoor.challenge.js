@@ -109,6 +109,10 @@ describe("[Challenge] Backdoor", function () {
       player.address,
       ethers.utils.parseEther("10"),
     ]);
+    //Execute attack from backDoor contract through signer: player
+    await backdoor.connect(player).execute(newWallets, data);
+    let bal = await token.balanceOf(player.address);
+    console.log("Player balance is", ethers.utils.formatEther(bal));
   });
 
   after(async function () {
