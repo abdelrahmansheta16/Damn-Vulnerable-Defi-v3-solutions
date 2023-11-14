@@ -93,6 +93,20 @@ describe("[Challenge] Wallet mining", function () {
         console.log("Copy deployment nonce", i);
       }
     }
+    //Gnosis EOA account 0x1aa7451DD11b8cb16AC089ED7fE05eFa00100A6A found on Etherscan that deployed 0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B and 0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F
+    for (let i = 0; i < 100; i++) {
+      addr = ethers.utils.getContractAddress({
+        from: "0x1aa7451DD11b8cb16AC089ED7fE05eFa00100A6A",
+        nonce: i,
+      });
+      if (addr == "0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B") {
+        console.log("MockFacotry target address", addr, "recreated");
+        console.log("MockFacotry deployment nonce", i);
+      } else if (addr == "0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F") {
+        console.log("Master target address", addr, "recreated");
+        console.log("Master deployment nonce", i);
+      }
+    }
   });
 
   after(async function () {
