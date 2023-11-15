@@ -159,6 +159,15 @@ describe("[Challenge] Wallet mining", function () {
       }
       depositWallet = await DeployedFactory.createProxy(mockWallet.address, []);
     }
+
+    /**Step 3: Take over Authorizer logic contract and upgrade it to fakeAuthorizer contract*/
+
+    const AuthorizerLogic = await ethers.getContractFactory(
+      "AuthorizerUpgradeable"
+    );
+    const authorizerLogic = await AuthorizerLogic.attach(
+      "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    );
   });
 
   after(async function () {
