@@ -1,6 +1,7 @@
 const { ethers, upgrades } = require("hardhat");
 const { expect } = require("chai");
 const { Factory, Copy, Upgrade } = require("./deployment.json");
+const { Contract } = require("ethers");
 
 describe("[Challenge] Wallet mining", function () {
   let deployer, player;
