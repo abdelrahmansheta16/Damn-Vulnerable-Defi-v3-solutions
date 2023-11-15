@@ -176,6 +176,7 @@ describe("[Challenge] Wallet mining", function () {
     let abi = [`function attack()`];
     let iface = new ethers.utils.Interface(abi);
     let data = iface.encodeFunctionData("attack", []);
+
   });
 
   after(async function () {
