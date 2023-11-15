@@ -73,6 +73,16 @@ describe("[Challenge] Climber", function () {
     /** FakeVault contract is the malicious implementation contract that replaces the initial implementation to
      * allow player to drain funds through compromised sweep funds function
      */
+
+    //Deploy climberAttack and FakeVault
+    let values = [0, 0, 0];
+    let salt = ethers.utils.id("climber");
+    const ClimberAttack = await ethers.getContractFactory("ClimberAttack");
+    const climberAttack = await ClimberAttack.deploy(
+      timelock.address,
+      values,
+      salt
+    );
   });
 
   after(async function () {
