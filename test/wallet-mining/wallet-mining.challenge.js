@@ -130,6 +130,20 @@ describe("[Challenge] Wallet mining", function () {
     console.log("MasterCopy deployed at", deployedCopy.contractAddress);
 
     await (await ethers.provider.sendTransaction(Upgrade)).wait();
+
+    deployedFactory = await (
+      await ethers.provider.sendTransaction(Factory)
+    ).wait();
+    console.log("Factory deployed at", deployedFactory.contractAddress);
+    DeployedFactory = (
+      await ethers.getContractFactory("GnosisSafeProxyFactory")
+    ).attach(deployedFactory.contractAddress);
+
+    let depositWallet, MockWallet, mockWallet;
+    //Deploy mockWallet logic contract
+    MockWallet = await ethers.getContractFactory("MockWallet");
+    mockWallet = await MockWallet.deploy();
+    console.log("MockWallet deployed at", mockWallet.address);
   });
 
   after(async function () {
