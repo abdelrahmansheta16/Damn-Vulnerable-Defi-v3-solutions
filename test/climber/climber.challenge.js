@@ -64,6 +64,15 @@ describe("[Challenge] Climber", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    /**Attack starts by running execute function on timeLock contract to
+     * (1) reset the delay time,
+     * (2) call grantRole on itself to give proposer role to climberAttack contract
+     * (3) climberAttack contract call back the schedule function and approve the operation.
+     * */
+
+    /** FakeVault contract is the malicious implementation contract that replaces the initial implementation to
+     * allow player to drain funds through compromised sweep funds function
+     */
   });
 
   after(async function () {
