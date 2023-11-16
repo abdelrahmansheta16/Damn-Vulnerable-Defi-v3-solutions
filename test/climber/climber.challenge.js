@@ -83,6 +83,10 @@ describe("[Challenge] Climber", function () {
       values,
       salt
     );
+    console.log(climberAttack.address);
+    const FakeVault = await ethers.getContractFactory("FakeVault");
+    const fakeVault = await FakeVault.deploy(player.address);
+    console.log(fakeVault.address);
   });
 
   after(async function () {
