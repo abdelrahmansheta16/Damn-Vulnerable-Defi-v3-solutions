@@ -87,6 +87,14 @@ describe("[Challenge] Climber", function () {
     const FakeVault = await ethers.getContractFactory("FakeVault");
     const fakeVault = await FakeVault.deploy(player.address);
     console.log(fakeVault.address);
+
+    //Prepare calldata to pass to schedule function on timeLock
+    let dataElements = [];
+
+    let abi1 = [`function updateDelay(uint64 newDelay)`];
+    let iface1 = new ethers.utils.Interface(abi1);
+    let data1 = iface1.encodeFunctionData("updateDelay", [0]);
+    dataElements.push(data1);
   });
 
   after(async function () {
