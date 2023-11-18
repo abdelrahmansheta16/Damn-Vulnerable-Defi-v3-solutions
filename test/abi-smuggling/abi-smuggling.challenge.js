@@ -58,6 +58,11 @@ describe("[Challenge] ABI smuggling", function () {
 
   it("Execution", async function () {
     /** CODE YOUR SOLUTION HERE */
+    /** step 1: Recreate and Verify key function sig */
+    let abi = [`function execute(address, bytes)`];
+    let iface = new ethers.utils.Interface(abi);
+    let sig = iface.getSighash("execute");
+    console.log(sig);
   });
 
   after(async function () {
